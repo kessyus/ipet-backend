@@ -6,7 +6,8 @@
   "license": "MIT",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "reset": "node tests/add_customer.js && node tests/add_admin.js && node tests/add_supplier.js"
   },
   "dependencies": {
     "axios": "^0.21.1",

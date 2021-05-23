@@ -7,8 +7,20 @@ module.exports = {
     cidade: String,
     estado: String,
     referencia: String,
-    cep: Number
+    cep: String
   },
+  pet: [
+    {
+      nome: {
+        type: String,
+        required: true
+      },
+      imagem: String,
+      data_nascimento: Date,
+      tipo: String,
+      raca: String
+    }
+  ],
   comentarios: String,
   favoritos: [
     {

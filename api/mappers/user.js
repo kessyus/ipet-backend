@@ -15,13 +15,13 @@ const defineUserType = (type) => {
 };
 
 const toUserDTO = (model) => {
-  const { id, nome, email, kind } = model;
+  const { id, nome, email, __t } = model;
 
   return {
     id,
     nome,
     email,
-    userType: defineUserType(kind)
+    userType: defineUserType(__t)
   };
 };
 

@@ -10,7 +10,7 @@ module.exports = {
     cidade: String,
     estado: String,
     referencia: String,
-    cep: Number
+    cep: String
   },
   comentarios: String,
   postagens: [
@@ -22,6 +22,12 @@ module.exports = {
     }
   ],
   visivel: Boolean,
-  favoritos: Number,
-  classificacao: Number
+  favoritos: {
+    type: Number,
+    default: 0
+  },
+  classificacao: {
+    type: Number,
+    default: 5
+  }
 };
