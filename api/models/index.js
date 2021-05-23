@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
-// Creating UserCollection Schema to be used for the Admin,
+// Creating Users Collection Schema to be used for the Admin,
 // Supplier and Customer
 const createSchema = (baseModel, model, options = {}) =>
   new Schema(
@@ -12,7 +12,7 @@ const createSchema = (baseModel, model, options = {}) =>
     },
     {
       timestamps: true,
-      collection: 'UserCollection',
+      collection: 'user',
       ...options
     }
   );
@@ -52,7 +52,7 @@ const categorySchema = require('./category');
 const category = mongoose.model(
   'categoria',
   createSchema(undefined, categorySchema, {
-    collection: 'CategoryCollection'
+    collection: 'category'
   })
 );
 

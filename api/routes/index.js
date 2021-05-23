@@ -3,6 +3,7 @@ const { name, version } = require('../../package.json');
 
 // route imports
 const v1UserRoute = require('./v1/user');
+const v1UploadRoute = require('./v1/upload');
 
 module.exports = (app) => {
   // greetings message
@@ -13,6 +14,7 @@ module.exports = (app) => {
   //v1 Routes
   const routerV1 = Router();
   v1UserRoute(routerV1);
+  v1UploadRoute(routerV1);
 
   app.use('/v1', routerV1);
 };
