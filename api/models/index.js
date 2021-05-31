@@ -50,7 +50,7 @@ const customer = user.discriminator(
 // Category
 const categorySchema = require('./category');
 const category = mongoose.model(
-  'categoria',
+  'category',
   createSchema(undefined, categorySchema, {
     collection: 'category'
   })

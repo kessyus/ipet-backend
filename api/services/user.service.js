@@ -1,6 +1,6 @@
-const { user } = require('../models/');
+const { user } = require('../models');
 const crypto = require('../utils/crypto');
-const userMapper = require('../mappers/user');
+const userMapper = require('../mappers/user.mapper');
 
 // Checks if user exists
 const userIsValid = async (email, senha) => {
@@ -31,7 +31,7 @@ const authenticate = async (email, senha) => {
   if (!result) {
     return {
       success: false,
-      message: 'Não foi possivel autenticar o usuário.',
+      message: 'Não foi possível autenticar o usuário.',
       details: ['Usuário ou senha inválido.']
     };
   }

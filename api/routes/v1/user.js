@@ -1,5 +1,5 @@
 const joi = require('joi');
-const userController = require('../../controllers/user');
+const userController = require('../../controllers/user.controller');
 const validateDTO = require('../../utils/validateDto');
 
 module.exports = (router) => {

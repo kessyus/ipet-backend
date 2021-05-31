@@ -1,28 +1,18 @@
 module.exports = {
   nome: {
     type: String,
-    required: true,
+    required: true
   },
   descricao: {
     type: String,
-    required: false,
+    required: true
   },
   status: {
     type: Boolean,
-    required: true,
+    required: true
   },
-  imagem: {
-    originalname: {
-      type: String,
-      required: false,
-    },
-    nome: {
-      type: String,
-      required: false,
-    },
-    type: {
-      type: String,
-      required: false,
-    },
-  },
+  url_imagem: {
+    type: String,
+    required: false
+  }
 };
