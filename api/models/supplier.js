@@ -1,7 +1,8 @@
-const { number } = require('joi');
-
 module.exports = {
-  documento: String,
+  documento: {
+    type: String,
+    required: true
+  },
   endereco: {
     rua: String,
     numero: String,

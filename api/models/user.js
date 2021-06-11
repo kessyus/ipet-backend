@@ -11,5 +11,6 @@ module.exports = {
     type: String,
     required: true
   },
+  contato: String,
   foto: String
 };

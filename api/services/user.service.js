@@ -44,5 +44,7 @@ const authenticate = async (email, senha) => {
 };
 
 module.exports = {
+  userIsValid,
+  createCredential,
   authenticate
 };

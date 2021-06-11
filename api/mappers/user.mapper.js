@@ -25,6 +25,36 @@ const toUserDTO = (model) => {
   };
 };
 
+const toSupplierDTO = (model) => {
+  const filteredData = model.map((item) => ({
+    id: item.id,
+    nome: item.nome,
+    documento: item.documento,
+    email: item.email,
+    visivel: item.visivel,
+    cidade: item.endereco.cidade,
+    estado: item.endereco.estado,
+    dt_criacao: item.createdAt
+  }));
+
+  return filteredData;
+};
+
+const toCustomerDTO = (model) => {
+  const filteredData = model.map((item) => ({
+    id: item.id,
+    nome: item.nome,
+    email: item.email,
+    cidade: item.endereco.cidade,
+    estado: item.endereco.estado,
+    dt_criacao: item.createdAt
+  }));
+
+  return filteredData;
+};
+
 module.exports = {
-  toUserDTO
+  toUserDTO,
+  toCustomerDTO,
+  toSupplierDTO
 };
