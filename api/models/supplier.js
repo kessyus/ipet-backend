@@ -3,16 +3,12 @@ module.exports = {
     type: String,
     required: true
   },
-  endereco: {
-    rua: String,
-    numero: String,
-    complemento: String,
-    bairro: String,
-    cidade: String,
-    estado: String,
-    referencia: String,
-    cep: String
-  },
+  rua: String,
+  numero: String,
+  complemento: String,
+  cidade: String,
+  estado: String,
+  cep: String,
   comentarios: String,
   postagens: [
     {
@@ -26,9 +22,5 @@ module.exports = {
   favoritos: {
     type: Number,
     default: 0
-  },
-  classificacao: {
-    type: Number,
-    default: 5
   }
 };

@@ -10,7 +10,5 @@ module.exports = {
   senha: {
     type: String,
     required: true
-  },
-  contato: String,
-  foto: String
+  }
 };

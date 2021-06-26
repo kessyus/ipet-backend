@@ -6,7 +6,7 @@ const { userIsValid, createCredential } = require('./user.service');
 // List all Suppliers
 const listSupplier = async () => {
   const supplierListFromDB = await user.find({
-    __t: 'supplier'
+    kind: 'supplier'
   });
 
   const supplierList = userMapper.toSupplierDTO(supplierListFromDB);
@@ -23,11 +23,9 @@ const createSupplier = async (
   rua,
   numero,
   complemento,
-  bairro,
   cidade,
   estado,
-  cep,
-  contato
+  cep
 ) => {
   const checkIfExists = await userIsValid(email, senha);
 
@@ -45,16 +43,12 @@ const createSupplier = async (
     nome,
     senha: crypto.createHash(`${senha}`),
     documento,
-    contato,
-    endereco: {
-      rua,
-      numero,
-      complemento,
-      bairro,
-      cidade,
-      estado,
-      cep
-    },
+    rua,
+    numero,
+    complemento,
+    cidade,
+    estado,
+    cep,
     visivel: false
   });
 
@@ -62,7 +56,7 @@ const createSupplier = async (
     return {
       success: false,
       message: 'Erro ao cadastrar o usuário.',
-      data: 'Procure o administrador.'
+      details: ['Procure o administrador.']
     };
   }
 
@@ -74,9 +68,39 @@ const createSupplier = async (
 };
 
 // Approve Supplier
-const approveSupplier = async () => {};
+const approveSupplier = async (id, status) => {
+  const supplierDB = await supplier.findById(id);
+
+  if (!supplierDB) {
+    return {
+      success: false,
+      message: 'Operação não pode ser realizada.',
+      details: ['Fornecedor não foi encontrado.'] 
+    }
+  }
+
+  supplierDB.visivel = status;
+
+  await supplierDB.save();
+
+  if (visivel) {
+    // Envia e-mail
+  }
+
+  return {
+    success: true,
+    message: 'Operação realizada com sucesso.',
+    data: {
+      id: supplierDB._id,
+      nome: supplierDB.nome,
+      email: supplierDB.email
+    }
+  }
+
+};
 
 module.exports = {
   createSupplier,
-  listSupplier
+  listSupplier,
+  approveSupplier
 };

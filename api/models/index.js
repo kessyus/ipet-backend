@@ -22,7 +22,7 @@ const userSchema = require('./user');
 const user = mongoose.model(
   'user',
   createSchema(undefined, userSchema, {
-    discriminatory: 'kind'
+    discriminatorKey: 'kind'
   })
 );
 

@@ -10,16 +10,28 @@ const listAllSuppliers = async (req, res, _) => {
   });
 };
 
+const approveSupplier = async (req, res, _) => {
+  const { id } = req.params;
+  const { status } = req.body;
+
+  const supplier = await supplierService.approveSupplier(id, status);
+
+  return res.status(200).send({
+    success: true,
+    message: 'Operação executada com sucesso.',
+    data: supplier
+  })
+}
+
 const createSupplier = async (req, res, _) => {
   const {
     nome,
     email,
     senha,
     documento,
-    contato,
     rua,
     numero,
-    bairro,
+    complemento,
     cidade,
     estado,
     cep
@@ -30,15 +42,12 @@ const createSupplier = async (req, res, _) => {
     email,
     senha,
     documento,
-    contato,
-    endereco: {
-      rua,
-      numero,
-      bairro,
-      cidade,
-      estado,
-      cep
-    }
+    rua,
+    numero,
+    complemento,
+    cidade,
+    estado,
+    cep
   );
 
   const resultCode = result.success ? 200 : 400;
@@ -54,5 +63,6 @@ const createSupplier = async (req, res, _) => {
 
 module.exports = {
   listAllSuppliers,
-  createSupplier
+  createSupplier,
+  approveSupplier,
 };

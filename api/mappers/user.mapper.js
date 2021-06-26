@@ -32,8 +32,8 @@ const toSupplierDTO = (model) => {
     documento: item.documento,
     email: item.email,
     visivel: item.visivel,
-    cidade: item.endereco.cidade,
-    estado: item.endereco.estado,
+    cidade: item.cidade,
+    estado: item.estado,
     dt_criacao: item.createdAt
   }));
 
@@ -45,8 +45,8 @@ const toCustomerDTO = (model) => {
     id: item.id,
     nome: item.nome,
     email: item.email,
-    cidade: item.endereco.cidade,
-    estado: item.endereco.estado,
+    cidade: item.cidade,
+    estado: item.estado,
     dt_criacao: item.createdAt
   }));
 
