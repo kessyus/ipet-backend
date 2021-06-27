@@ -4,9 +4,9 @@ const { user, customer } = require('../models');
 const { userIsValid, createCredential } = require('./user.service');
 
 // List all Customers
-const listAllCustomer = async () => {
+const listCustomer = async () => {
   const customerListFromDB = await user.find({
-    __t: 'customer'
+    kind: 'customer'
   });
 
   const customerList = userMapper.toCustomerDTO(customerListFromDB);
@@ -19,16 +19,19 @@ const createCustomer = async (
   nome,
   email,
   senha,
+  documento,
   rua,
   numero,
   complemento,
-  bairro,
   cidade,
   estado,
   cep,
-  tipo
+  nome_pet,
+  nascimento,
+  tipo,
+  raca
 ) => {
-  const checkIfExists = userIsValid(email, senha);
+  const checkIfExists = await userIsValid(email, senha);
 
   if (checkIfExists) {
     return {
@@ -38,22 +41,22 @@ const createCustomer = async (
     };
   }
 
-  const resultFromDB = await supplier.create({
-    __t: tipo,
+  const resultFromDB = await customer.create({
+    kind: 'customer',
     email,
     nome,
     senha: crypto.createHash(`${senha}`),
     documento,
-    endereco: {
-      rua,
-      numero,
-      complemento,
-      bairro,
-      cidade,
-      estado,
-      cep
-    },
-    visivel: false
+    rua,
+    numero,
+    complemento,
+    cidade,
+    estado,
+    cep,
+    nome_pet,
+    nascimento,
+    tipo,
+    raca
   });
 
   if (!resultFromDB) {
@@ -71,10 +74,7 @@ const createCustomer = async (
   };
 };
 
-// Approve Supplier
-const approveSupplier = async () => {};
-
 module.exports = {
   createCustomer,
-  listAllCustomer
+  listCustomer
 };

@@ -1,35 +1,20 @@
 module.exports = {
-  endereco: {
-    rua: String,
-    numero: String,
-    complemento: String,
-    bairro: String,
-    cidade: String,
-    estado: String,
-    referencia: String,
-    cep: String
+  rua: String,
+  numero: String,
+  complemento: String,
+  cidade: String,
+  estado: String,
+  cep: String,
+  nome_pet: {
+    type: String,
+    required: true
   },
-  pet: [
-    {
-      nome: {
-        type: String,
-        required: true
-      },
-      imagem: String,
-      data_nascimento: Date,
-      tipo: String,
-      raca: String
-    }
-  ],
+  nascimento: Date,
+  tipo: String,
+  raca: String,
   comentarios: String,
   favoritos: [
     {
-      fornecedor: String
-    }
-  ],
-  classificacoes: [
-    {
-      nota: Number,
       fornecedor: String
     }
   ]

@@ -1,11 +1,11 @@
-const join = require('joi');
-
+const joi = require('joi');
+const customerController = require('../../controllers/customer.controller');
 const validateDTO = require('../../utils/validateDto');
 
 module.exports = (router) => {
   router
     .route('/customer')
-    .get()
+    .get(customerController.listAllCustomers)
     .post(
       validateDTO(
         'body',
@@ -25,12 +25,16 @@ module.exports = (router) => {
           documento: joi.string().required().messages({
             'any.required': `"Documento" é um campo obrigatório`,
             'string.empty': `"Documento" não deve ser vazio`
+          }),
+          nome_pet: joi.string().required().messages({
+            'any.required': `"Nome do Pet" é um campo obrigatório`,
+            'string.empty': `"Nome do Pet" não deve ser vazio`
           })
         },
         {
           allowUnknown: true
         }
       ),
-      // controller
-    )
+      customerController.createCustomer
+    );
 }

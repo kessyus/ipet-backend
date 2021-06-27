@@ -38,7 +38,7 @@ const createSupplier = async (
   }
 
   const resultFromDB = await supplier.create({
-    __t: 'supplier',
+    kind: 'supplier',
     email,
     nome,
     senha: crypto.createHash(`${senha}`),

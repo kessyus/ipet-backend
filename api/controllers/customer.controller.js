@@ -1,7 +1,7 @@
 const customerService = require('../services/customer.service');
 
 const listAllCustomers = async (req, res, _) => {
-  const customerList = await customerService.listAllCustomers();
+  const customerList = await customerService.listCustomer();
 
   return res.status(200).send({
     success: true,
@@ -18,28 +18,34 @@ const createCustomer = async (req, res, _) => {
     documento,
     rua,
     numero,
-    bairro,
+    complemento,
     cidade,
     estado,
     cep,
-    tipo
+    nome_pet,
+    nascimento,
+    tipo,
+    raca
   } = req.body;
 
-  const customer = await customerService.createCustomer(
+  const result = await customerService.createCustomer(
     nome,
     email,
     senha,
     documento,
     rua,
     numero,
-    bairro,
+    complemento,
     cidade,
     estado,
     cep,
-    tipo
+    nome_pet,
+    nascimento,
+    tipo,
+    raca
   );
 
-  const resultCode = customer.success ? 200 : 400;
+  const resultCode = result.success ? 200 : 400;
   const returnData = result.success
     ? { data: result.data }
     : { details: result.details };
