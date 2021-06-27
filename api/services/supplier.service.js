@@ -83,7 +83,7 @@ const approveSupplier = async (id, status) => {
 
   await supplierDB.save();
 
-  if (visivel) {
+  if (status) {
     // Envia e-mail
   }
 

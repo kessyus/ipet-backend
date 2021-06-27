@@ -1,11 +1,11 @@
-const joi = require('joi');
-const supplierController = require('../../controllers/supplier.controller');
+const join = require('joi');
+
 const validateDTO = require('../../utils/validateDto');
 
 module.exports = (router) => {
   router
-    .route('/supplier')
-    .get(supplierController.listAllSuppliers)
+    .route('/customer')
+    .get()
     .post(
       validateDTO(
         'body',
@@ -31,23 +31,6 @@ module.exports = (router) => {
           allowUnknown: true
         }
       ),
-      supplierController.createSupplier
-    );
-
-  router
-    .route('/supplier/:id')
-    .post(
-      validateDTO(
-        'body',
-        {
-          status: joi.boolean().required().messages({
-            'any.required': `"status" é um campo obrigatório`,
-          })
-        },
-        {
-          allowUnknown: false
-        }
-      ),
-      supplierController.approveSupplier
+      // controller
     )
-};
+}
