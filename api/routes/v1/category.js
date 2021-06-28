@@ -1,6 +1,6 @@
 const multer = require('multer');
 const multerConfig = require('../../utils/multer');
-const uploadToAWS = require('../../utils/upload.file');
+const uploadToAWS = require('../../utils/file');
 const joi = require('joi');
 const validateDTO = require('../../utils/validateDto');
 const categoryController = require('../../controllers/category.controller');

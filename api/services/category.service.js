@@ -1,4 +1,5 @@
 const { category } = require('../models');
+const { deleteS3 } = require('../utils/file');
 
 // Check if already Exists
 const categoryExists = async (nome) => {
@@ -62,9 +63,11 @@ const deleteCategory = async (id) => {
       details: ['Categoria não existe.']
     };
 
-  // TODO: exclude image
-
-  await category.remove(categoryFromDB);
+  const { key } = categoryFromDB;
+  await Promise.all([
+    deleteS3(key),
+    category.deleteOne(categoryFromDB)
+  ]);
 
   return {
     success: true,
