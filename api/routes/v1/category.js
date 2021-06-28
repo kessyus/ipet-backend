@@ -1,28 +1,17 @@
+const multer = require('multer');
+const multerConfig = require('../../utils/multer');
+const uploadToAWS = require('../../utils/upload.file');
 const joi = require('joi');
-const categoryController = require('../../controllers/category.controller');
 const validateDTO = require('../../utils/validateDto');
+const categoryController = require('../../controllers/category.controller');
 
 module.exports = (router) => {
   router
     .route('/category')
     .get(categoryController.listAll)
     .post(
-      validateDTO(
-        'body',
-        {
-          nome: joi.string().required().messages({
-            'any.required': `"Nome" é um campo obrigatório`,
-            'string.empty': `"Nome" não deve ser vazio`
-          }),
-          descricao: joi.string().required().messages({
-            'any.required': `"Descricao" é um campo obrigatório`,
-            'string.empty': `"Descricao" não deve ser vazio`
-          })
-        },
-        {
-          allowUnknown: true
-        }
-      ),
+      multer(multerConfig).single('file'),
+      uploadToAWS.uploadS3,
       categoryController.createCategory
     );
 

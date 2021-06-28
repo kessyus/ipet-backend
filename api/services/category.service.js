@@ -35,7 +35,8 @@ const createCategory = async (model) => {
     nome: model.nome,
     descricao: model.descricao,
     status: model.status,
-    url_imagem: model.url_imagem
+    key: model.key,
+    url: model.url
   });
 
   const { nome, descricao } = newCategory;

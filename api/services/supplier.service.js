@@ -7,7 +7,7 @@ const { userIsValid, createCredential } = require('./user.service');
 const listSupplier = async () => {
   const supplierListFromDB = await user.find({
     kind: 'supplier'
-  });
+  }).sort({nome:1});
 
   const supplierList = userMapper.toSupplierDTO(supplierListFromDB);
 

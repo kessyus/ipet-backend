@@ -11,8 +11,12 @@ module.exports = {
     type: Boolean,
     required: true
   },
-  url_imagem: {
+  key: {
     type: String,
-    required: false
+    required: true
+  },
+  url: {
+    type: String,
+    required: true
   }
 };
