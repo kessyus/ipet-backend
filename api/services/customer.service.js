@@ -1,5 +1,4 @@
 const crypto = require('../utils/crypto');
-const userMapper = require('../mappers/user.mapper');
 const { user, customer } = require('../models');
 const { userIsValid, createCredential } = require('./user.service');
 
@@ -9,9 +8,22 @@ const listCustomer = async () => {
     kind: 'customer'
   });
 
-  const customerList = userMapper.toCustomerDTO(customerListFromDB);
+  const result = customerListFromDB.map(item => {
+    return {
+      id: item.id,
+      nome: item.nome,
+      email: item.email,
+      cidade: item.cidade,
+      estado: item.estado,
+      nome_pet: item.nome_pet,
+      raca: item.raca,
+      dt_criacao: item.createdAt
+    }
+  })
 
-  return customerList;
+  console.log(result);
+
+  return result;
 };
 
 // Create Customer
