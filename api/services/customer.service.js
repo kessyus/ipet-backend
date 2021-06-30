@@ -6,7 +6,7 @@ const { userIsValid, createCredential } = require('./user.service');
 const listCustomer = async () => {
   const customerListFromDB = await user.find({
     kind: 'customer'
-  });
+  }).sort({nome:1});
 
   const result = customerListFromDB.map(item => {
     return {
