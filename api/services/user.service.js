@@ -4,9 +4,13 @@ const userMapper = require('../mappers/user.mapper');
 
 // Checks if user exists
 const userIsValid = async (email, senha) => {
-  return (await user.findOne({ email, senha: crypto.createHash(senha) }))
-    ? true
-    : false;
+
+  const userData = await user.findOne({ email, senha: crypto.createHash(senha) });
+
+  if ((!userData) || (userData.kind === 'supplier' && userData.visivel === false))
+    return false;
+
+  return true;
 };
 
 // Create token
@@ -32,7 +36,7 @@ const authenticate = async (email, senha) => {
     return {
       success: false,
       message: 'Não foi possível autenticar o usuário.',
-      details: ['Usuário ou senha inválido.']
+      details: ['Usuário ou senha inválidos ou sua conta não está ativa.']
     };
   }
 
