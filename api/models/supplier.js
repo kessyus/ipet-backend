@@ -1,3 +1,6 @@
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
 module.exports = {
   documento: {
     type: String,
@@ -22,5 +25,9 @@ module.exports = {
   favoritos: {
     type: Number,
     default: 0
-  }
+  },
+  products: [{
+    type: Schema.Types.ObjectId,
+    ref: 'product'
+  }],
 };

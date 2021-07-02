@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-
 const { Schema } = mongoose;
 
 // Creating Users Collection Schema to be used for the Admin,
@@ -52,7 +51,22 @@ const categorySchema = require('./category');
 const category = mongoose.model(
   'category',
   createSchema(undefined, categorySchema, {
-    collection: 'category'
+    collection: 'category',
+    toJSON: {
+      virtuals: true,
+    },
+  })
+);
+
+// Product
+const productSchema = require('./product');
+const product = mongoose.model(
+  'product', 
+  createSchema(undefined, productSchema, {
+    collection: 'product',
+    toJSON: {
+      virtuals: true,
+    },
   })
 );
 
@@ -61,5 +75,6 @@ module.exports = {
   admin,
   supplier,
   customer,
-  category
+  category,
+  product
 };

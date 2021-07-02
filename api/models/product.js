@@ -4,15 +4,15 @@ const Schema = mongoose.Schema;
 module.exports = {
   nome: {
     type: String,
-    required: true
+    required: true,
   },
   descricao: {
     type: String,
-    required: true
+    required: true,
   },
-  status: {
-    type: Boolean,
-    required: true
+  preco: {
+    type: Number,
+    required: true,
   },
   key: {
     type: String,
@@ -22,8 +22,12 @@ module.exports = {
     type: String,
     required: true
   },
-  product: [{
+  category: {
     type: Schema.Types.ObjectId,
-    ref: 'product'
-  }]
-};
+    ref: 'category'
+  },
+  supplier: {
+    type: Schema.Types.ObjectId,
+    ref: 'supplier'
+  }
+}
