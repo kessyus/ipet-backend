@@ -1,4 +1,4 @@
-const { product } = require('../models');
+const { product, category, supplier } = require('../models');
 
 // Check if already Exists
 const productExists = async (nome) => {
@@ -6,17 +6,62 @@ const productExists = async (nome) => {
 };
 
 // List all products by category
-const productByCategoryListAll = async (category) => {
-  const productList = await product.find({ category });
+const productByCategoryListAll = async (categoryId) => {
 
-  return productList;
+  const { nome: categoryName } = await category.findById(categoryId);
+  const suppliersDB = await supplier.find({});
+
+  const listSuppliers = suppliersDB.map(item => {
+    return [ item._id.toString(), item.nome ];
+  });
+  const supplierMap = new Map(listSuppliers);
+
+  const productList = await product.find({ category: categoryId });
+
+  const result = productList.map(item => {
+    return {
+      id: item.id,
+      nome: item.nome,
+      descricao: item.descricao,
+      preco: item.preco,
+      url: item.url,
+      category: item.category,
+      supplier: item.supplier,
+      createdAt: item.createdAt,
+      categoryName,
+      supplierName: supplierMap.get(item.supplier.toString()) 
+    }
+  });
+
+  return result;
 };
 
 // List all products by supplier Id
 const productBySupplierListAll = async (supplier) => {
   const productList = await product.find({ supplier });
 
-  return productList;
+  // Map category (id, name)
+  const categoryDB = await category.find({});
+  const listCategory = categoryDB.map(item => {
+    return [ item._id.toString(), item.nome ];
+  });
+  const categoryMap = new Map(listCategory);
+
+  const result = productList.map(item => {
+    return {
+      id: item.id,
+      nome: item.nome,
+      descricao: item.descricao,
+      preco: item.preco,
+      url: item.url,
+      category: item.category,
+      supplier: item.supplier,
+      createdAt: item.createdAt,
+      categoryName: categoryMap.get(item.category.toString())
+    }
+  });
+
+  return result;
 };
 
 // Create product
