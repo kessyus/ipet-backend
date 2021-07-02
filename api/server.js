@@ -1,5 +1,5 @@
 const express = require('express');
-const cors = require('cors');
+// const cors = require('cors');
 const morgan = require('morgan');
 const path = require('path');
 
@@ -15,7 +15,7 @@ const port = process.env.PORT || 3000;
 const app = express();
 
 // Middlewares
-app.use(cors({origin: '*'}));
+// app.use(cors({origin: '*'}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
