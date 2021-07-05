@@ -2,6 +2,7 @@ const crypto = require('../utils/crypto');
 const userMapper = require('../mappers/user.mapper');
 const { user, supplier } = require('../models');
 const { userIsValid, createCredential } = require('./user.service');
+const emailUtils = require('../utils/email');
 
 // List all Suppliers
 const listSupplier = async () => {
@@ -87,6 +88,13 @@ const approveSupplier = async (id, status) => {
 
   if (status) {
     // Envia e-mail
+    emailUtils.send({
+      destinatario: supplierDB.email,
+      remetente: process.env.SENDGRID_SENDER,
+      assunto: `Confirmação do cadastro de ${supplierDB.nome}`,
+      corpo:
+        'Seja bem vindo(a)! Sua conta do iPet já está liberada e pronta para uso.'
+    });
   }
 
   return {
