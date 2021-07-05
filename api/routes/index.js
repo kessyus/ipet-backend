@@ -14,7 +14,7 @@ module.exports = (app) => {
     res.send({ name, version });
   });
 
-  //v1 Routes
+  // v1 Routes
   const routerV1 = Router();
   v1UserRoute(routerV1);
   v1CategoryRoute(routerV1);

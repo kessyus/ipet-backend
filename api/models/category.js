@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+
+const { Schema } = mongoose;
 
 module.exports = {
   nome: {
@@ -22,8 +23,10 @@ module.exports = {
     type: String,
     required: true
   },
-  product: [{
-    type: Schema.Types.ObjectId,
-    ref: 'product'
-  }]
+  product: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'product'
+    }
+  ]
 };

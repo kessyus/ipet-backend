@@ -1,18 +1,19 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+
+const { Schema } = mongoose;
 
 module.exports = {
   nome: {
     type: String,
-    required: true,
+    required: true
   },
   descricao: {
     type: String,
-    required: true,
+    required: true
   },
   preco: {
     type: Number,
-    required: true,
+    required: true
   },
   key: {
     type: String,
@@ -30,4 +31,4 @@ module.exports = {
     type: Schema.Types.ObjectId,
     ref: 'supplier'
   }
-}
+};

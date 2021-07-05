@@ -1,7 +1,7 @@
 const multer = require('multer');
+const joi = require('joi');
 const multerConfig = require('../../utils/multer');
 const uploadToAWS = require('../../utils/file');
-const joi = require('joi');
 const validateDTO = require('../../utils/validateDto');
 const categoryController = require('../../controllers/category.controller');
 
@@ -24,9 +24,9 @@ module.exports = (router) => {
           .regex(/^[0-9a-fA-F]{24}$/)
           .required()
           .messages({
-            'any.required': `"Id" é um campo obrigatório`,
-            'string.empty': `"Id" não deve ser vazio`,
-            'string.regex': `"Id" fora do formato esperado`
+            'any.required': '"Id" é um campo obrigatório',
+            'string.empty': '"Id" não deve ser vazio',
+            'string.regex': '"Id" fora do formato esperado'
           })
       }),
       categoryController.searchById
@@ -38,9 +38,9 @@ module.exports = (router) => {
           .regex(/^[0-9a-fA-F]{24}$/)
           .required()
           .messages({
-            'any.required': `"Id" é um campo obrigatório`,
-            'string.empty': `"Id" não deve ser vazio`,
-            'string.regex': `"Id" fora do formato esperado`
+            'any.required': '"Id" é um campo obrigatório',
+            'string.empty': '"Id" não deve ser vazio',
+            'string.regex': '"Id" fora do formato esperado'
           })
       }),
       categoryController.deleteCategory
@@ -52,25 +52,25 @@ module.exports = (router) => {
           .regex(/^[0-9a-fA-F]{24}$/)
           .required()
           .messages({
-            'any.required': `"Id" é um campo obrigatório`,
-            'string.empty': `"Id" não deve ser vazio`,
-            'string.regex': `"Id" fora do formato esperado`
+            'any.required': '"Id" é um campo obrigatório',
+            'string.empty': '"Id" não deve ser vazio',
+            'string.regex': '"Id" fora do formato esperado'
           })
       }),
       validateDTO(
         'body',
         {
           nome: joi.string().required().messages({
-            'any.required': `"Nome" é um campo obrigatório`,
-            'string.empty': `"Nome" não deve ser vazio`
+            'any.required': '"Nome" é um campo obrigatório',
+            'string.empty': '"Nome" não deve ser vazio'
           }),
           descricao: joi.string().required().messages({
-            'any.required': `"Descricao" é um campo obrigatório`,
-            'string.empty': `"Descricao" não deve ser vazio`
+            'any.required': '"Descricao" é um campo obrigatório',
+            'string.empty': '"Descricao" não deve ser vazio'
           }),
           status: joi.boolean().required().messages({
-            'any.required': `"Status" é um campo obrigatório`,
-            'string.empty': `"Status" não deve ser vazio`
+            'any.required': '"Status" é um campo obrigatório',
+            'string.empty': '"Status" não deve ser vazio'
           })
         },
         {

@@ -6,6 +6,7 @@ const path = require('path');
 // Database
 const mongoose = require('mongoose');
 const db = require('../db/config');
+
 mongoose.connect(db.uri, { useUnifiedTopology: true, useNewUrlParser: true });
 
 // Port environment definition
@@ -26,9 +27,11 @@ app.use(morgan('dev')); // logging HTTP requests
 
 // Routes
 const router = require('./routes');
+
 router(app);
 
 app.listen(port, () => {
+  // eslint-disable-next-line no-console
   console.log(`🚀 Server starded at http://localhost:${port}`);
 });
 

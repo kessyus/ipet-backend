@@ -1,6 +1,6 @@
 const userService = require('../services/user.service');
 
-const auth = async (req, res, _) => {
+const auth = async (req, res) => {
   const { email, senha } = req.body;
 
   const result = await userService.authenticate(email, senha);

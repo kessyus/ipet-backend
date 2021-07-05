@@ -11,20 +11,20 @@ module.exports = (router) => {
         'body',
         {
           nome: joi.string().required().messages({
-            'any.required': `"Nome" é um campo obrigatório`,
-            'string.empty': `"Nome" não deve ser vazio`
+            'any.required': '"Nome" é um campo obrigatório',
+            'string.empty': '"Nome" não deve ser vazio'
           }),
           senha: joi.string().required().messages({
-            'any.required': `"Senha" é um campo obrigatório`,
-            'string.empty': `"Senha" não deve ser vazio`
+            'any.required': '"Senha" é um campo obrigatório',
+            'string.empty': '"Senha" não deve ser vazio'
           }),
           email: joi.string().required().messages({
-            'any.required': `"Email" é um campo obrigatório`,
-            'string.empty': `"Email" não deve ser vazio`
+            'any.required': '"Email" é um campo obrigatório',
+            'string.empty': '"Email" não deve ser vazio'
           }),
           documento: joi.string().required().messages({
-            'any.required': `"Documento" é um campo obrigatório`,
-            'string.empty': `"Documento" não deve ser vazio`
+            'any.required': '"Documento" é um campo obrigatório',
+            'string.empty': '"Documento" não deve ser vazio'
           })
         },
         {
@@ -34,20 +34,18 @@ module.exports = (router) => {
       supplierController.createSupplier
     );
 
-  router
-    .route('/supplier/:id')
-    .post(
-      validateDTO(
-        'body',
-        {
-          status: joi.boolean().required().messages({
-            'any.required': `"status" é um campo obrigatório`,
-          })
-        },
-        {
-          allowUnknown: false
-        }
-      ),
-      supplierController.approveSupplier
-    )
+  router.route('/supplier/:id').post(
+    validateDTO(
+      'body',
+      {
+        status: joi.boolean().required().messages({
+          'any.required': '"status" é um campo obrigatório'
+        })
+      },
+      {
+        allowUnknown: false
+      }
+    ),
+    supplierController.approveSupplier
+  );
 };

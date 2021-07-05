@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+
+const { Schema } = mongoose;
 
 module.exports = {
   documento: {
@@ -26,8 +27,10 @@ module.exports = {
     type: Number,
     default: 0
   },
-  products: [{
-    type: Schema.Types.ObjectId,
-    ref: 'product'
-  }],
+  products: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'product'
+    }
+  ]
 };

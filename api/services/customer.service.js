@@ -4,24 +4,22 @@ const { userIsValid, createCredential } = require('./user.service');
 
 // List all Customers
 const listCustomer = async () => {
-  const customerListFromDB = await user.find({
-    kind: 'customer'
-  }).sort({nome:1});
+  const customerListFromDB = await user
+    .find({
+      kind: 'customer'
+    })
+    .sort({ nome: 1 });
 
-  const result = customerListFromDB.map(item => {
-    return {
-      id: item.id,
-      nome: item.nome,
-      email: item.email,
-      cidade: item.cidade,
-      estado: item.estado,
-      nome_pet: item.nome_pet,
-      raca: item.raca,
-      dt_criacao: item.createdAt
-    }
-  })
-
-  console.log(result);
+  const result = customerListFromDB.map((item) => ({
+    id: item.id,
+    nome: item.nome,
+    email: item.email,
+    cidade: item.cidade,
+    estado: item.estado,
+    nome_pet: item.nome_pet,
+    raca: item.raca,
+    dt_criacao: item.createdAt
+  }));
 
   return result;
 };

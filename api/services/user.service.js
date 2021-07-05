@@ -4,11 +4,17 @@ const userMapper = require('../mappers/user.mapper');
 
 // Checks if user exists
 const userIsValid = async (email, senha) => {
+  const userData = await user.findOne({
+    email,
+    senha: crypto.createHash(senha)
+  });
 
-  const userData = await user.findOne({ email, senha: crypto.createHash(senha) });
-
-  if ((!userData) || (userData.kind === 'supplier' && userData.visivel === false))
+  if (
+    !userData
+    || (userData.kind === 'supplier' && userData.visivel === false)
+  ) {
     return false;
+  }
 
   return true;
 };

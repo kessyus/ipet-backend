@@ -5,9 +5,11 @@ const { userIsValid, createCredential } = require('./user.service');
 
 // List all Suppliers
 const listSupplier = async () => {
-  const supplierListFromDB = await user.find({
-    kind: 'supplier'
-  }).sort({createdAt:-1});
+  const supplierListFromDB = await user
+    .find({
+      kind: 'supplier'
+    })
+    .sort({ createdAt: -1 });
 
   const supplierList = userMapper.toSupplierDTO(supplierListFromDB);
 
@@ -75,8 +77,8 @@ const approveSupplier = async (id, status) => {
     return {
       success: false,
       message: 'Operação não pode ser realizada.',
-      details: ['Fornecedor não foi encontrado.'] 
-    }
+      details: ['Fornecedor não foi encontrado.']
+    };
   }
 
   supplierDB.visivel = status;
@@ -91,12 +93,11 @@ const approveSupplier = async (id, status) => {
     success: true,
     message: 'Operação realizada com sucesso.',
     data: {
-      id: supplierDB._id,
+      id: supplierDB.id,
       nome: supplierDB.nome,
       email: supplierDB.email
     }
-  }
-
+  };
 };
 
 module.exports = {

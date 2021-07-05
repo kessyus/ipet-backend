@@ -1,37 +1,33 @@
 const { product, category, supplier } = require('../models');
 
 // Check if already Exists
-const productExists = async (nome) => {
-  return (await product.findOne({ nome })) ? true : false;
-};
+const productExists = async (nome) => !!(await product.findOne({ nome }));
 
 // List all products by category
 const productByCategoryListAll = async (categoryId) => {
-
   const { nome: categoryName } = await category.findById(categoryId);
   const suppliersDB = await supplier.find({});
 
-  const listSuppliers = suppliersDB.map(item => {
-    return [ item._id.toString(), item.nome ];
-  });
+  const listSuppliers = suppliersDB.map((item) => [
+    item.id.toString(),
+    item.nome
+  ]);
   const supplierMap = new Map(listSuppliers);
 
   const productList = await product.find({ category: categoryId });
 
-  const result = productList.map(item => {
-    return {
-      id: item.id,
-      nome: item.nome,
-      descricao: item.descricao,
-      preco: item.preco,
-      url: item.url,
-      category: item.category,
-      supplier: item.supplier,
-      createdAt: item.createdAt,
-      categoryName,
-      supplierName: supplierMap.get(item.supplier.toString()) 
-    }
-  });
+  const result = productList.map((item) => ({
+    id: item.id,
+    nome: item.nome,
+    descricao: item.descricao,
+    preco: item.preco,
+    url: item.url,
+    category: item.category,
+    supplier: item.supplier,
+    createdAt: item.createdAt,
+    categoryName,
+    supplierName: supplierMap.get(item.supplier.toString())
+  }));
 
   return result;
 };
@@ -42,24 +38,60 @@ const productBySupplierListAll = async (supplier) => {
 
   // Map category (id, name)
   const categoryDB = await category.find({});
-  const listCategory = categoryDB.map(item => {
-    return [ item._id.toString(), item.nome ];
-  });
+  const listCategory = categoryDB.map((item) => [
+    item.id.toString(),
+    item.nome
+  ]);
   const categoryMap = new Map(listCategory);
 
-  const result = productList.map(item => {
-    return {
-      id: item.id,
-      nome: item.nome,
-      descricao: item.descricao,
-      preco: item.preco,
-      url: item.url,
-      category: item.category,
-      supplier: item.supplier,
-      createdAt: item.createdAt,
-      categoryName: categoryMap.get(item.category.toString())
-    }
-  });
+  const result = productList.map((item) => ({
+    id: item.id,
+    nome: item.nome,
+    descricao: item.descricao,
+    preco: item.preco,
+    url: item.url,
+    category: item.category,
+    supplier: item.supplier,
+    createdAt: item.createdAt,
+    categoryName: categoryMap.get(item.category.toString())
+  }));
+
+  return result;
+};
+
+// List all products with supplier information
+const productListAll = async () => {
+  // List all product list
+  const productList = await product.find({});
+
+  // Map supplier (id, nome)
+  const suppliersDB = await supplier.find({});
+  const listSuppliers = suppliersDB.map((item) => [
+    item.id.toString(),
+    item.nome
+  ]);
+  const supplierMap = new Map(listSuppliers);
+
+  // Map category (id, name)
+  const categoryDB = await category.find({});
+  const listCategory = categoryDB.map((item) => [
+    item.id.toString(),
+    item.nome
+  ]);
+  const categoryMap = new Map(listCategory);
+
+  const result = productList.map((item) => ({
+    id: item.id,
+    nome: item.nome,
+    descricao: item.descricao,
+    preco: item.preco,
+    url: item.url,
+    category: item.category,
+    supplier: item.supplier,
+    createdAt: item.createdAt,
+    categoryName: categoryMap.get(item.category.toString()),
+    supplierName: supplierMap.get(item.supplier.toString())
+  }));
 
   return result;
 };
@@ -69,12 +101,15 @@ const createProduct = async (model) => {
   // Check if nome already Exists
   const nameIsValid = await productExists(model.nome);
 
-  if (nameIsValid)
+  if (nameIsValid) {
     return {
       success: false,
       message: 'Não foi possível criar o produto',
-      details: ['O nome informado já existe na lista de produtos do fornecedor.']
+      details: [
+        'O nome informado já existe na lista de produtos do fornecedor.'
+      ]
     };
+  }
 
   const newProduct = await product.create({
     nome: model.nome,
@@ -102,5 +137,6 @@ module.exports = {
   productExists,
   productByCategoryListAll,
   productBySupplierListAll,
-  createProduct,
+  productListAll,
+  createProduct
 };

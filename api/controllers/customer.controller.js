@@ -1,6 +1,6 @@
 const customerService = require('../services/customer.service');
 
-const listAllCustomers = async (req, res, _) => {
+const listAllCustomers = async (req, res) => {
   const customerList = await customerService.listCustomer();
 
   return res.status(200).send({
@@ -10,7 +10,7 @@ const listAllCustomers = async (req, res, _) => {
   });
 };
 
-const createCustomer = async (req, res, _) => {
+const createCustomer = async (req, res) => {
   const {
     nome,
     email,

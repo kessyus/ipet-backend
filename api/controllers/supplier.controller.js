@@ -1,6 +1,6 @@
 const supplierService = require('../services/supplier.service');
 
-const listAllSuppliers = async (req, res, _) => {
+const listAllSuppliers = async (req, res) => {
   const supplierList = await supplierService.listSupplier();
 
   return res.status(200).send({
@@ -10,7 +10,7 @@ const listAllSuppliers = async (req, res, _) => {
   });
 };
 
-const approveSupplier = async (req, res, _) => {
+const approveSupplier = async (req, res) => {
   const { id } = req.params;
   const { status } = req.body;
 
@@ -20,10 +20,10 @@ const approveSupplier = async (req, res, _) => {
     success: true,
     message: 'Operação executada com sucesso.',
     data: supplier
-  })
-}
+  });
+};
 
-const createSupplier = async (req, res, _) => {
+const createSupplier = async (req, res) => {
   const {
     nome,
     email,
@@ -64,5 +64,5 @@ const createSupplier = async (req, res, _) => {
 module.exports = {
   listAllSuppliers,
   createSupplier,
-  approveSupplier,
+  approveSupplier
 };
