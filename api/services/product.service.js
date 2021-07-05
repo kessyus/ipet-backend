@@ -93,7 +93,18 @@ const productListAll = async () => {
     supplierName: supplierMap.get(item.supplier.toString())
   }));
 
-  return result;
+  const sortedResult = result.sort((a, b) => {
+    if (a.supplierName > b.supplierName) {
+      return 1;
+    }
+    if (a.supplierName < b.supplierName) {
+      return -1;
+    }
+    // if a is equal to b
+    return 0;
+  });
+
+  return sortedResult;
 };
 
 // Create product
